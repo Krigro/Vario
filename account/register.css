@@ -1,0 +1,343 @@
+
+/* REGISTER PAGE */
+
+.register-page {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 650px;
+    margin: 0 auto;
+    padding: 75px var(--page-padding) 110px;
+    background-color: var(--color-background);
+}
+
+.register-page h1 {
+    margin-bottom: 55px;
+    font-family: var(--font-heading);
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: 500;
+    text-align: center;
+    color: var(--color-text);
+}
+
+.account-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    min-height: 100px;
+    padding: 20px var(--page-padding);
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.account-header .back-link {
+    grid-column: 1;
+    justify-self: start;
+}
+
+.account-header .logo {
+    grid-column: 2;
+    justify-self: center;
+    display: block;
+}
+
+.account-header .logo img {
+    display: block;
+    width: 150px;
+    height: auto;
+}
+
+
+/* REGISTER FORM */
+
+#register-form {
+    width: 100%;
+}
+
+.register-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 80px;
+}
+
+/* PERSONAL INFORMATION */
+
+.register-fields {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.register-fields .form-group {
+    margin-bottom: 25px;
+}
+
+.register-fields label {
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.register-fields input {
+    width: 100%;
+    min-height: 50px;
+    padding: 14px 15px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+
+    background-color: var(--color-background);
+    color: var(--color-text);
+
+    font-family: var(--font-primary);
+    font-size: 14px;
+
+    transition: border-color var(--transition);
+}
+
+.register-fields input:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+    border-color: var(--color-text);
+}
+
+.register-fields input::placeholder {
+    color: var(--color-text-light);
+}
+
+/* REGISTER OPTIONS */
+
+.register-options {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-top: 5px;
+}
+
+/* NEWSLETTER */
+
+.newsletter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.newsletter-options legend {
+    margin-bottom: 20px;
+    padding: 0;
+
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.newsletter-options label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-family: var(--font-primary);
+    font-size: 13px;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.newsletter-options input[type="radio"] {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    accent-color: var(--color-beige);
+    cursor: pointer;
+}
+
+/* TERMS & CONDITIONS */
+
+.terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    font-family: var(--font-primary);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.terms-checkbox input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 17px;
+    height: 17px;
+    margin: 3px 0 0;
+    accent-color: var(--color-beige);
+    cursor: pointer;
+}
+
+.terms-checkbox a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.terms-checkbox a:hover {
+    opacity: 0.65;
+}
+
+/* REGISTER MESSAGE */
+
+#register-message {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+#register-message:empty {
+    display: none;
+}
+
+/* SIGN UP BUTTON */
+
+.register-options .primary-button {
+    width: 100%;
+    min-height: 50px;
+    padding: 15px 25px;
+    border: 1px solid var(--color-beige);
+    background-color: var(--color-beige);
+    color: var(--color-text);
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition:
+        background-color var(--transition),
+        color var(--transition);
+    cursor: pointer;
+}
+
+.register-options .primary-button:hover {
+    background-color: var(--color-text);
+    border-color: var(--color-text);
+    color: var(--color-background);
+}
+
+/* LOGIN REDIRECT */
+
+.login-redirect {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: center;
+    color: var(--color-text-light);
+}
+
+.login-redirect a {
+    color: var(--color-text);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.login-redirect a:hover {
+    opacity: 0.65;
+}
+
+/* --- RESPONSIVE --- */
+
+/* TABLET */
+
+@media (max-width: 1024px) {
+
+    .register-page {
+        max-width: 900px;
+        padding-top: 65px;
+        padding-bottom: 90px;
+    }
+
+    .register-layout {
+        gap: 45px;
+    }
+
+    .register-page h1 {
+        margin-bottom: 45px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .register-page {
+        min-height: auto;
+        padding: 45px var(--page-padding) 75px;
+    }
+
+    .register-page h1 {
+        margin-bottom: 35px;
+        font-size: 30px;
+    }
+
+
+    .register-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .register-fields .form-group {
+        margin-bottom: 20px;
+    }
+
+    .register-fields input {
+        min-height: 48px;
+        font-size: 13px;
+    }
+
+
+    .register-options {
+        gap: 22px;
+        padding-top: 30px;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .newsletter-options legend {
+        font-size: 16px;
+    }
+
+    .newsletter-options label,
+    .terms-checkbox {
+        font-size: 12px;
+    }
+
+
+    .register-options .primary-button {
+        min-height: 48px;
+    }
+
+    .login-redirect {
+        font-size: 12px;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+
+    .register-page {
+        padding-top: 35px;
+    }
+
+    .register-page h1 {
+        font-size: 27px;
+    }
+
+    .newsletter-options legend {
+        font-size: 15px;
+    }
+}

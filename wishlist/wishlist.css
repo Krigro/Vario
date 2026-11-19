@@ -1,0 +1,36 @@
+
+/* WISHLIST PAGE */
+
+.wishlist-page {
+    min-height: 500px;
+}
+
+.wishlist-page #products-message a {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 13px 25px;
+    border: 1px solid var(--color-beige);
+    background-color: var(--color-beige);
+    color: var(--color-text);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+}
+
+.wishlist-page #products-message a:hover {
+    background-color: var(--color-greige);
+}
+
+.wishlist-page .back-to-top[hidden] {
+    display: none;
+}
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 600px) {
+    .wishlist-page {
+        min-height: 350px;
+    }
+}

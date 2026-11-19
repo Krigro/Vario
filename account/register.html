@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register for a VARIO account to access your wishlist, order history, and more.">
+    <title>Register | VARIO</title>
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="./register.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    </head>
+
+    <body>
+
+        <!-- Header -->
+         <header class="account-header">
+            <a href="../index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                Back to Shopping
+            </a>
+
+            <a href="../index.html" class="logo">
+                <img src="../img/vario.png" alt="VARIO logo">
+            </a>
+         </header>
+
+
+         <!-- Main -->
+<main class="register-page">
+    <h1>Register for an account</h1>
+
+    <form id="register-form">
+        <div class="register-layout">
+
+            <div class="register-fields">
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+
+                    <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" autocomplete="name" required>
+                </div>
+                
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" autocomplete="new-password" minlength="8" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirmPassword" autocomplete="new-password" minlength="8" required>
+                </div>
+            </div>
+
+
+            <!-- Newsletter & Terms-->
+             <div class="register-options">
+
+                <fieldset class="newsletter-options">
+                    <legend>Would you like to subscribe to our newsletter?</legend>
+
+                    <label>
+                        <input type="radio" name="newsletter" value="yes">
+                        Yes, I'd love to!
+                    </label>
+
+                    <label>
+                        <input type="radio" name="newsletter" value="no">
+                        No, thank you.
+                    </label>
+                </fieldset>
+
+                <label class="terms-checkbox">
+                    <input type="checkbox" name="terms" required>
+                    I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.
+                </label>
+
+                <p id="register-message" role="status" aria-live="polite"></p>
+
+                <button type="submit" class="primary-button">
+                    Sign up
+                </button>
+
+                <p class="login-redirect">
+                    Already have an account? <a href="./login.html">Log in</a>
+                </p>
+        </div>
+        </div>
+    </form>
+</main>
+
+<!-- Footer -->
+<footer>
+<div class="footer-content">
+
+    <div class="footer-brand">
+        <a href="../index.html">
+            <img src="../img/vario.png" alt="VARIO logo">
+        </a>
+        <p>Everyday finds, thoughtfully selected.</p>
+    </div>
+
+    <div class="footer-column">
+        <h3>SHOP</h3>
+        <a href="../products/index.html">All Products</a>
+        <div id="footer-categories"></div>
+    </div>
+
+    <div class="footer-column">
+        <h3>CUSTOMER SUPPORT</h3>
+        <a href="#">Contact Us</a>
+        <a href="#">Shipping & Delivery</a>
+        <a href="#">Returns & Exchanges</a>
+        <a href="#">FAQ</a>
+    </div>
+
+    <div class="footer-column">
+        <h3>ACCOUNT</h3>
+        <a href="./login.html">Log In</a>
+        <a href="./register.html">Create Account</a>
+        <a href="../cart/index.html">Shopping Cart</a>
+    </div>
+</div>
+
+<div class="footer-bottom">
+    <p>&copy; 2026 VARIO. All rights reserved.</p>
+    <p>Privacy Policy | Terms & Conditions</p>
+</div>
+</footer>
+
+<script src="./register.js" type="module"></script>
+</body>
+</html>

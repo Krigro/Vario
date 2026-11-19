@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your VARIO account">
+    <title>My Account | VARIO</title>
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .account-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 75vh;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .account-placeholder h1 {
+            margin-bottom: 20px;
+            font-family: var(--font-heading);
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 500;
+        }
+
+        .account-placeholder p {
+            max-width: 450px;
+            margin-bottom: 35px;
+            color: var(--color-text-light);
+            font-family: var(--font-primary);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            min-width: 200px;
+            padding: 15px 25px;
+            background-color: var(--color-text);
+            color: #fff;
+            font-family: var(--font-primary);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .back-home-btn:hover {
+            background-color: var(--color-beige);
+            color: var(--color-text);
+        }
+
+        .logout-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: var(--color-text-light);
+            font-family: var(--font-primary);
+            font-size: 13px;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .logout-button:hover {
+            color: var(--color-text);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="account-placeholder">
+
+            <h1>Something is coming.</h1>
+
+            <p>
+                We're currently working on your account page.
+                Check back soon!
+            </p>
+
+            <a href="../index.html" class="back-home-btn">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                Back to Home
+            </a>
+
+            <button type="button" id="logout-btn" class="logout-button">
+                Log out
+            </button>
+
+        </section>
+    </main>
+
+   <script type="module">
+    import { isLoggedIn, logout } from "../shared/auth.js";
+
+    if (!isLoggedIn()) {
+        window.location.replace("./login.html");
+    } else {
+        const logoutButton = document.getElementById("logout-btn");
+
+        logoutButton.addEventListener("click", () => {
+            logout();
+            window.location.href = "../index.html";
+        });
+    }
+</script>
+
+</body>
+</html>

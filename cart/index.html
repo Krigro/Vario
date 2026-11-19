@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View your shopping cart and manage items before checkout.">
+    <title>Shopping Cart | VARIO</title>
+
+    <link rel="stylesheet" href="../shared/global.css">
+    <link rel="stylesheet" href="./cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </head>
+
+    <body>
+
+    <!-- Header -->
+         <header class="cart-header">
+
+            <a href="../products/index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to Shopping</span>   
+            </a>
+
+            <a href="../index.html" class="logo">
+                <img src="../img/vario.png" alt="VARIO logo">
+            </a>
+
+            <div class="cart-header-actions">
+            <a href="../account/login.html" id="account-link" class="account-link" aria-label="Log in">
+                <i class="fa-solid fa-user" aria-hidden="true"></i>
+                <span>Log in</span>
+            </a>
+
+            <a href="../wishlist/index.html" class="wishlist-btn" aria-label="Wishlist">
+                <i class="fa-regular fa-heart" aria-hidden="true"></i>
+            </a>
+            </div>
+         </header>
+
+<!-- Main -->
+<main class="cart-page">
+    <div class="cart-layout">
+
+        <!-- Cart items -->
+        <section class="cart-products" aria-label="Cart items">
+            <div class="cart-products-header">
+            <h1>Your cart (<span id="cart-item-count">0 items</span>)</h1>
+         
+            <button type="button" id="clear-cart" class="clear-cart">
+                Clear Cart
+            </button>
+         </div>
+
+            <div id="cart-items"></div>
+            <p id="cart-message" role="status" aria-live="polite"></p>
+
+<!-- Discount code -->
+ <details class="discount-section">
+    <summary>
+        <span>Discount Code</span>
+    </summary>
+
+    <div class="discount-content">
+        <label for="discount-code">Enter discount code</label>
+        <input type="text" id="discount-code" placeholder="Discount code">
+        <button type="button" id="apply-discount">Apply</button>
+    </div>
+ </details>
+
+ <!-- Gift card -->
+  <details class="giftcard-section">
+    <summary>
+        Gift Card
+    </summary>
+
+    <div class="giftcard-content">
+        <label for="giftcard-code">Enter gift card code</label>
+        <input type="text" id="giftcard-code" placeholder="Gift card code">
+        <button type="button" id="apply-giftcard">Apply</button>
+    </div>
+  </details>
+
+</section>
+
+<!-- Order summary -->
+ <aside class="order-summary">
+    <h2>Order Summary</h2>
+    
+    <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">$0.00</span>
+    </div>
+
+    <div class="summary-row">
+        <span>Shipping</span>
+        <span id="cart-shipping">$0.00</span>
+    </div>
+
+    <div class="summary-row summary-total">
+        <strong>Total</strong>
+        <strong id="cart-total">$0.00</strong>
+    </div>
+
+    <a href="../checkout/index.html" id="checkout-btn" class="primary-button" aria-disabled="true" tabindex="-1">
+        Proceed to Checkout
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
+ </aside>
+</div>    
+</main>
+
+<!-- Footer -->
+ <footer>
+<div class="footer-content">
+
+    <div class="footer-brand">
+        <a href="../index.html">
+            <img src="../img/vario.png" alt="VARIO logo">
+        </a>
+        <p>Everyday finds, thoughtfully selected.</p>
+    </div>
+
+    <div class="footer-column">
+        <h3>SHOP</h3>
+        <a href="../products/index.html">All Products</a>
+        <div id="footer-categories"></div>
+    </div>
+
+    <div class="footer-column">
+        <h3>CUSTOMER SUPPORT</h3>
+        <a href="#">Contact Us</a>
+        <a href="#">Shipping & Delivery</a>
+        <a href="#">Returns & Exchanges</a>
+        <a href="#">FAQ</a>
+    </div>
+
+    <div class="footer-column">
+        <h3>ACCOUNT</h3>
+        <a href="../account/login.html" id="footer-account-link">Log In</a>
+        <a href="../account/register.html">Create Account</a>
+        <a href="./index.html">Shopping Cart</a>
+    </div>
+</div>
+
+<div class="footer-bottom">
+    <p>&copy; 2026 VARIO. All rights reserved.</p>
+    <p>Privacy Policy | Terms & Conditions</p>
+</div>
+</footer>
+
+<script src="./cart.js" type="module"></script>
+</body>
+</html>
+
+
+
+    

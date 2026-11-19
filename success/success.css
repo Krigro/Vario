@@ -1,0 +1,241 @@
+
+/* SUCCESS */
+
+body.success-page {
+    display: block;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--color-beige);
+    color: var(--color-text);
+}
+
+.success-container {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    padding: 130px 30px 30px;
+}
+
+.success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: none;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+}
+
+#success-title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* SUCCESS MESSAGES */
+
+.success-message {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-size: 24px;
+    line-height: 1.4;
+}
+
+.success-greeting {
+    margin-top: 50px;
+}
+
+.success-greeting p {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-size: 24px;
+    line-height: 1.1;
+}
+
+.success-signature {
+    margin: 30px 0 0;
+    font-family: var(--font-heading);
+    font-size: 30px;
+    line-height: 1.4;
+}
+
+/* Back-btn */
+
+.back-to-shopping {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    min-width: 220px;
+    min-height: 50px;
+    margin-top: 50px;
+    padding: 15px 30px;
+
+    border: 1px solid var(--color-text);
+    border-radius: 0;
+
+    background-color: var(--color-text);
+    color: var(--color-background);
+
+    font-family: var(--font-primary);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+
+    transition:
+        background-color var(--transition),
+        color var(--transition);
+}
+
+.back-to-shopping:hover {
+    background-color: transparent;
+    color: var(--color-text);
+}
+
+.back-to-shopping:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 4px;
+}
+
+/* vario img */
+
+.success-brand {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.success-brand a {
+    display: block;
+    width: min(100%, 1000px);
+}
+
+.success-brand img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* RESPONSIVE */
+
+/* TABLET */
+
+@media (max-width: 1024px) {
+
+    .success-container {
+        padding: 100px 30px 30px;
+    }
+
+    #success-title,
+    .success-message,
+    .success-greeting p,
+    .success-signature {
+        font-size: 21px;
+    }
+
+    .success-greeting {
+        margin-top: 55px;
+    }
+
+    .back-to-shopping {
+        margin-top: 95px;
+    }
+
+    .success-brand a {
+        width: min(100%, 800px);
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .success-container {
+        min-height: 100svh;
+        padding: 45px 20px 25px;
+    }
+
+    #success-title,
+    .success-message {
+        font-size: 18px;
+    }
+
+    .success-greeting {
+        margin-top: 35px;
+    }
+
+    .success-greeting p,
+    .success-signature {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    .success-signature {
+        margin-top: 25px;
+    }
+
+    .back-to-shopping {
+        width: 100%;
+        max-width: 280px;
+        min-height: 48px;
+        margin-top: 45px;
+        padding: 13px 20px;
+        font-size: 11px;
+    }
+
+    .success-brand {
+        width: 100%;
+        margin-top: 35px;
+        flex-shrink: 0;
+    }
+
+    .success-brand a {
+        display: block;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .success-brand img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+
+    .success-container {
+        padding: 35px 16px 20px;
+    }
+
+    #success-title,
+    .success-message,
+    .success-greeting p,
+    .success-signature {
+        font-size: 16px;
+    }
+
+    .success-greeting {
+        margin-top: 30px;
+    }
+
+    .back-to-shopping {
+        margin-top: 40px;
+    }
+
+    .success-brand {
+        margin-top: 35px;
+    }
+}
