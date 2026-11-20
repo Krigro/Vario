@@ -1,5 +1,5 @@
 import { fetchAll, fetchOne } from "../shared/api.js";
-import { isLoggedIn } from "../shared/auth.js";
+import { isLoggedIn, getCurrentUser } from "../shared/auth.js";
 
 import {
     getCart,
@@ -18,7 +18,7 @@ const clearCartButton = document.getElementById("clear-cart");
 const cartItemCount = document.getElementById("cart-item-count");
 const cartShipping = document.getElementById("cart-shipping");
 
-const FAVORITES_KEY = "vario_favorites_v1";
+const FAVORITES_KEY_PREFIX = "vario_favorites_v1";
 
 let renderVersion = 0;
 
@@ -38,25 +38,40 @@ function getProductPrice(product) {
 }
 
 /* FAVORITES */
-function getFavorites() {
-    try {
-        const favorites = JSON.parse(
-            localStorage.getItem(FAVORITES_KEY)
-        );
+function getFavoritesKey() {
+    const user = getCurrentUser();
 
+    if (!isLoggedIn() || !user?.email) {
+        return null;
+    }
+
+    return `${FAVORITES_KEY_PREFIX}_${user.email.toLowerCase()}`;
+}
+
+function getFavorites() {
+    const key = getFavoritesKey();
+
+    if (!key) return [];
+
+    try {
+        const favorites = JSON.parse(localStorage.getItem(key));
         return Array.isArray(favorites) ? favorites : [];
     } catch {
         return [];
     }
-    }
+}
 
-    function toggleFavorite(id) {
-        const favorites = getFavorites();
+function toggleFavorite(id) {
+    const key = getFavoritesKey();
 
-        const updated = favorites.includes(id) ? favorites.filter((favoriteId) => favoriteId !== id) : [...favorites, id];
+    if (!key) return;
 
-        localStorage.setItem(FAVORITES_KEY, JSON.stringify(updated));
-    }
+    const favorites = getFavorites();
+
+    const updated = favorites.includes(id) ? favorites.filter((favoriteId) => favoriteId !== id) : [...favorites, id];
+
+    localStorage.setItem(key, JSON.stringify(updated));
+}
 
 /* ACCOUNT LINK */
 
@@ -269,6 +284,14 @@ function createCartItem(product, quantity) {
     }
 
     favoriteButton.addEventListener("click", () => {
+        if (!isLoggedIn() || !getCurrentUser()?.email) {
+            const returnUrl = 
+            window.location.pathname + window.location.search;
+            window.location.href = `../account/login.html?redirect=${encodeURIComponent(returnUrl)}`;
+
+            return;
+        }
+        
         toggleFavorite(product.id);
         updateFavoriteButton();
     });

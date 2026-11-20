@@ -141,7 +141,9 @@ registerForm?.addEventListener("submit", async (event) => {
         registerMessage.textContent =
             "Account created successfully!";
 
-        window.location.href = "./login.html";
+            const redirect = new URLSearchParams(window.location.search).get("redirect");
+
+        window.location.href = redirect ? `./login.html?redirect=${encodeURIComponent(redirect)}` : "./login.html";
 
     } catch (error) {
         console.error("Registration failed:", error);

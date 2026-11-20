@@ -72,6 +72,16 @@ function getRedirectUrl() {
     return url.pathname + url.search + url.hash;
 }
 
+const registerLink = document.getElementById("register-link");
+
+if (registerLink) {
+    const params = new URLSearchParams(window.location.search);
+    const redirect = params.get("redirect");
+
+    if (redirect) {
+        registerLink.href = `./register.html?redirect=${encodeURIComponent(getRedirectUrl())}`;
+    }
+}
 /* FORM SUBMIT */
 
 loginForm?.addEventListener("submit", async (event) => {

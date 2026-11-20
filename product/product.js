@@ -2,7 +2,7 @@
 import { fetchAll, fetchOne } from "../shared/api.js";
 import { addToCart, getCart } from "../shared/cart-storage.js";
 import { initFastCart, openFastCart } from "../shared/fast-cart.js";
-import { isLoggedIn } from "../shared/auth.js";
+import { isLoggedIn, getCurrentUser } from "../shared/auth.js";
 
 const productContainer = document.getElementById("product-container");
 const productMessage = document.getElementById("product-message");
@@ -53,7 +53,7 @@ function updateAccountLink() {
 
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
-const FAVORITES_KEY = "vario_favorites_v1";
+const FAVORITES_KEY_PREFIX = "vario_favorites_v1";
 
 /* FORMAT PRICE */
 
@@ -70,12 +70,23 @@ function getProductPrice(product) {
 
 /* FAVORITES */
 
-function getFavorites() {
-    try {
-        const favorites = JSON.parse(
-            localStorage.getItem(FAVORITES_KEY)
-        );
+function getFavoritesKey() {
+    const user = getCurrentUser();
 
+    if (!isLoggedIn() || !user?.email) {
+        return null;
+    }
+
+    return `${FAVORITES_KEY_PREFIX}_${user.email.toLowerCase()}`;
+}
+
+function getFavorites() {
+    const key = getFavoritesKey();
+
+    if (!key) return [];
+
+    try {
+        const favorites = JSON.parse(localStorage.getItem(key));
         return Array.isArray(favorites) ? favorites : [];
     } catch {
         return [];
@@ -83,13 +94,15 @@ function getFavorites() {
 }
 
 function toggleFavorite(id) {
+    const key = getFavoritesKey();
+
+    if (!key) return;
+
     const favorites = getFavorites();
 
-    const updated = favorites.includes(id)
-        ? favorites.filter((favoriteId) => favoriteId !== id)
-        : [...favorites, id];
+    const updated = favorites.includes(id) ? favorites.filter((favoriteId) => favoriteId !== id) : [...favorites, id];
 
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(updated));
+    localStorage.setItem(key, JSON.stringify(updated));
 }
 
 /* CART COUNT */
@@ -405,6 +418,16 @@ function renderProduct(product) {
     updateFavoriteButton();
 
     favoriteButton.addEventListener("click", () => {
+        if (!isLoggedIn() || !getCurrentUser()?.email) {
+            const returnUrl = 
+            window.location.pathname + window.location.search;
+
+            window.location.href = 
+            `../account/login.html?redirect=${encodeURIComponent(returnUrl)}`;
+
+            return;
+        }
+
         toggleFavorite(product.id);
         updateFavoriteButton();
     });

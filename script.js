@@ -1,7 +1,7 @@
 import { fetchAll } from "./shared/api.js";
 import { addToCart } from "./shared/cart-storage.js";
 import { initFastCart, openFastCart } from "./shared/fast-cart.js";
-import { isLoggedIn } from "./shared/auth.js";
+import { isLoggedIn, getCurrentUser } from "./shared/auth.js";
 
 const carouselContent = document.getElementById("carousel-content");
 const carouselDots = document.getElementById("carousel-dots");
@@ -14,7 +14,7 @@ const categoriesButton = document.getElementById("categories-btn");
 const footerCategories = document.getElementById("footer-categories");
 const searchForm = document.querySelector(".search-form");
 
-const FAVORITES_KEY = "vario_favorites_v1";
+const FAVORITES_KEY_PREFIX = "vario_favorites_v1";
 
 let allProducts = [];
 let currentSlide = 0;
@@ -63,14 +63,25 @@ function createPriceElement(product) {
     return container;
 }
 
-/* FAVORITES STORAGE */
+/* FAVORITES */
+
+function getFavoritesKey() {
+    const user = getCurrentUser();
+
+    if (!isLoggedIn() || !user?.email) {
+        return null;
+    }
+
+    return `${FAVORITES_KEY_PREFIX}_${user.email.toLowerCase()}`;
+}
 
 function getFavorites() {
-    try {
-        const favorites = JSON.parse(
-            localStorage.getItem(FAVORITES_KEY)
-        );
+    const key = getFavoritesKey();
 
+    if (!key) return [];
+
+    try {
+        const favorites = JSON.parse(localStorage.getItem(key));
         return Array.isArray(favorites) ? favorites : [];
     } catch {
         return [];
@@ -78,16 +89,15 @@ function getFavorites() {
 }
 
 function toggleFavorite(id) {
+    const key = getFavoritesKey();
+
+    if (!key) return;
+
     const favorites = getFavorites();
 
-    const updated = favorites.includes(id)
-        ? favorites.filter(itemId => itemId !== id)
-        : [...favorites, id];
+    const updated = favorites.includes(id) ? favorites.filter((favoriteId) => favoriteId !== id) : [...favorites, id];
 
-    localStorage.setItem(
-        FAVORITES_KEY,
-        JSON.stringify(updated)
-    );
+    localStorage.setItem(key, JSON.stringify(updated));
 
     window.dispatchEvent(new Event("favoritesUpdated"));
 }
@@ -149,8 +159,19 @@ function createProductCard(product, showRating = true) {
     favoriteButton.appendChild(favoriteIcon);
 
     favoriteButton.addEventListener("click", () => {
+        if (!isLoggedIn() || !getCurrentUser()?.email) {
+            const returnUrl =
+            window.location.pathname +
+            window.location.search +
+            window.location.hash;
+
+            window.location.href = 
+            `./account/login.html?redirect=${encodeURIComponent(returnUrl)}`;
+            return;
+        }
+
         toggleFavorite(product.id);
-    });
+        });
 
     const info = document.createElement("div");
     info.className = "product-info";

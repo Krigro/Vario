@@ -2,7 +2,7 @@
 import { fetchAll } from "../shared/api.js";
 import { addToCart } from "../shared/cart-storage.js";
 import { initFastCart, openFastCart } from "../shared/fast-cart.js";
-import { isLoggedIn } from "../shared/auth.js";
+import { isLoggedIn, getCurrentUser } from "../shared/auth.js";
 
 const productsGrid = document.getElementById("products-grid");
 const productsMessage = document.getElementById("products-message");
@@ -11,7 +11,17 @@ const footerCategories = document.getElementById("footer-categories");
 const categoriesButton = document.getElementById("categories-btn");
 const backToTop = document.querySelector(".back-to-top");
 
-const FAVORITES_KEY = "vario_favorites_v1";
+const FAVORITES_KEY_PREFIX = "vario_favorites_v1";
+function getFavoritesKey() {
+const user = getCurrentUser();
+
+if (!isLoggedIn() || !user?.email) {
+    return null;
+}
+
+return `${FAVORITES_KEY_PREFIX}_${user.email.toLowerCase()}`;
+}
+
 let allProducts = [];
 
 /* PRICE */
@@ -30,8 +40,12 @@ function getProductPrice(product) {
 /* FAVORITES */
 
 function getFavorites() {
+    const key = getFavoritesKey();
+
+    if (!key) return [];
+
     try {
-        const favorites = JSON.parse(localStorage.getItem(FAVORITES_KEY));
+        const favorites = JSON.parse(localStorage.getItem(key));
         return Array.isArray(favorites) ? favorites : [];
     } catch {
         return [];
@@ -39,9 +53,13 @@ function getFavorites() {
 }
 
 function removeFavorite(id) {
+    const key = getFavoritesKey ();
+
+    if (!key) return;
+
     const updated = getFavorites().filter((favoriteId) => favoriteId !== id);
 
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(updated));
+    localStorage.setItem(key, JSON.stringify(updated));
 
     renderWishlist();
 }
@@ -310,6 +328,16 @@ function updateAccountLink() {
 /* INITIALIZE */
 
 async function initWishlist() {
+    if (!isLoggedIn() || !getCurrentUser()?.email) {
+        const returnUrl =
+        window.location.pathname + window.location.search;
+
+        window.location.replace(
+            `../account/login.html?redirect=${encodeURIComponent(returnUrl)}`
+        );
+        return;
+    }
+
     initFastCart();
     updateAccountLink();
 
@@ -334,12 +362,22 @@ async function initWishlist() {
 }
 
 window.addEventListener("storage", (event) => {
-    if (event.key === FAVORITES_KEY) {
+    if (event.key === getFavoritesKey()) {
         renderWishlist();
     }
 });
 
 window.addEventListener("pageshow", () => {
+    if (!isLoggedIn() || !getCurrentUser()?.email) {
+        const returnUrl =
+        window.location.pathname + window.location.search;
+
+        window.location.replace(
+            `../account/login.html?redirect=${encodeURIComponent(returnUrl)}`
+        );
+        return;
+    }
+
     if (allProducts.length > 0) {
         renderWishlist();
     }

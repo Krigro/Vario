@@ -1,4 +1,5 @@
 import { fetchOne } from "./api.js";
+import { isLoggedIn, getCurrentUser } from "./auth.js";
 
 import {
     getCart,
@@ -6,10 +7,6 @@ import {
     removeFromCart,
     cartCount
 } from "./cart-storage.js";
-
-
-
-/* ELEMENTS */
 
 let overlay;
 let fastCart;
@@ -23,7 +20,7 @@ let renderVersion = 0;
 let previousFocus = null;
 
 
-const FAVORITES_KEY = "vario_favorites_v1";
+const FAVORITES_KEY_PREFIX = "vario_favorites_v1";
 
 /* FORMAT PRICE */
 
@@ -36,35 +33,44 @@ function formatPrice(price) {
 
 /* FAVORITES */
 
-function getFavorites() {
-    try {
-        const favorites = JSON.parse(
-            localStorage.getItem(FAVORITES_KEY)
-        );
+function getFavoritesKey() {
+   const user = getCurrentUser();
 
+   if (!isLoggedIn() || !user?.email) {
+    return null;
+   }
+
+   return `${FAVORITES_KEY_PREFIX}_${user.email.toLowerCase()}`;
+ }
+
+ function getFavorites() {
+    const key = getFavoritesKey();
+
+    if (!key) return [];
+
+    try { 
+        const favorites = JSON.parse(localStorage.getItem(key));
         return Array.isArray(favorites) ? favorites : [];
     } catch {
         return [];
     }
-}
+ }
 
-function isFavorite(id) {
+ function isFavorite(id) {
     return getFavorites().includes(id);
-}
+ }
 
-function toggleFavorite(id) {
-    const favorites = getFavorites();
+ function toggleFavorite(id) {
+    const key = getFavoritesKey();
 
-    const updated = favorites.includes(id)
-        ? favorites.filter((favoriteId) => favoriteId !== id)
-        : [...favorites, id];
+    if (!key) return false;
 
-    localStorage.setItem(
-        FAVORITES_KEY,
-        JSON.stringify(updated)
-    );
+ const favorites = getFavorites();
 
-    // Notify other components on the same page
+ const updated = favorites.includes(id) ? favorites.filter((favoriteId) => favoriteId !== id) : [...favorites, id];
+
+ localStorage.setItem(key, JSON.stringify(updated));
+
     window.dispatchEvent(
         new CustomEvent("favoritesUpdated", {
             detail: { id, favorites: updated }
@@ -191,7 +197,7 @@ export function initFastCart() {
             handleCartUpdate();
         }
 
-        if (event.key === FAVORITES_KEY || event.key === null) { 
+        if (event.key === getFavoritesKey() || event.key === null) { 
             updateFavoriteIcons();
         }
     });
@@ -524,6 +530,15 @@ function handleCartClick(event) {
     const id = cartItem.dataset.id;
 
     if (button.classList.contains("fast-cart-favorite")) {
+        if (!isLoggedIn() || !getCurrentUser()?.email) {
+            const returnUrl = 
+            window.location.pathname + window.location.search + window.location.hash;
+
+            window.location.href = new URL(`../account/login.html?redirect=${encodeURIComponent(returnUrl)}`,
+        import.meta.url).href;
+        return;
+        }
+
         toggleFavorite(id);
         updateFavoriteIcons();
         return;
