@@ -490,7 +490,8 @@ footer {
 }
 
 .footer-column a,
-#footer-categories a {
+#footer-categories a,
+.footer-column span {
     font-size: 13px;
     color: var(--color-text);
     transition: opacity var(--transition);
