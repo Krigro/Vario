@@ -481,7 +481,7 @@ footer {
     gap: 12px;
 }
 
-.footer-column h3 {
+.footer-column h3, .footer-column h2 {
     margin-bottom: 10px;
     font-family: var(--font-heading);
     font-size: 13px;
