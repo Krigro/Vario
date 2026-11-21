@@ -161,6 +161,10 @@ The following areas are included in the testing process:
 
 Testing is performed locally and on the deployed GitHub Pages application.
 
+## AI Usage
+
+AI assistance used during this project is documented in [AI Usage Log](./AI_LOG.md)
+
 ## Author
 
 Developed by Kristine as part of a Noroff front-end development assignment.
