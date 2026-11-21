@@ -119,7 +119,8 @@ No dependency installation or build process is required.
 
 ## Design and Project Planning
 
-- **Figma Style Guide and Prototypes:** 
+**Figma Style Guide and Prototypes:** 
+
 Desktop prototype:
 (https://www.figma.com/proto/Vn3Ckg4ToRWg9fG8jQFGy0/Vario---Exam-project-1?node-id=3-3&p=f&t=MsU75O7rjRiajcEo-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=3%3A3&show-proto-sidebar=1) 
 
